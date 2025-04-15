@@ -9,7 +9,7 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 
 @bot.event
 async def on_ready():
-    print(f'Bot başarıyla giriş yaptı: {bot.user}.')
+    print(f'Giriş başarılı: {bot.user}.')
 
 @bot.command()
 async def add_task(ctx, *, description):
@@ -19,7 +19,7 @@ async def add_task(ctx, *, description):
     c.execute("INSERT INTO tasks (description, completed) VALUES (?, ?)", (description, 0))
     conn.commit()
     conn.close()
-    await ctx.send(f'Yeni görev eklendi! Görevleri görmek için !show_tasks yazabilirsin.')
+    await ctx.send(f'Yeni görev eklendi! Görevleri görmek için !show_tasks, silmek için !delete_task komutlarını kullanabilirsin.')
 
 @bot.command()
 async def delete_task(ctx, task_id: int):
@@ -41,9 +41,9 @@ async def show_tasks(ctx):
     conn.close()
     if tasks:
         task_list = "\n".join([f"{task['id']}: {task['description']} (Tamamlandı: {'✅' if task['completed'] else '❌'})" for task in tasks])
-        await ctx.send(f"Görev listesi aşağıdadır:\n{task_list}")
+        await ctx.send(f"Görev listesi: \n{task_list}")
     else:
-        await ctx.send("Herhangi bir görev bulunamadı.")
+        await ctx.send("Görev bulunamadı.")
 
 @bot.command()
 async def complete_task(ctx, task_id: int):
@@ -53,7 +53,7 @@ async def complete_task(ctx, task_id: int):
     c.execute("UPDATE tasks SET completed = 1 WHERE id = ?", (task_id,))
     conn.commit()
     conn.close()
-    await ctx.send(f'{task_id} numaralı görev tamamlandı olarak işaretlendi.')
+    await ctx.send(f'{task_id} numaralı görev tamamlandı.')
 
 
 
