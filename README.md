@@ -14,7 +14,7 @@ Bu proje, kullanıcıların Discord üzerinden görev eklemesine, silmesine, gö
 1. **Projeyi klonlayın:**
 
    ```bash
-   git clone [https://github.com/kullaniciadi/task-managergit](https://github.com/kullaniciadi/task-manager.git)
+   git clone [https://github.com/betultopkan/task-managergit](https://github.com/betultopkan/task-manager.git)
    cd task-manager
    ```
 
